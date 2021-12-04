@@ -93,7 +93,7 @@ class LinkedList:
             array[index] = current.value
             current = current.next
             index = index + 1
-            
+
         return array
 
     def reverse(self):
@@ -111,6 +111,68 @@ class LinkedList:
         self.last.next = None
         self.first = previous
 
+    def getKthFromTheEnd(self, k):
+        if self.isEmpty():
+            raise BaseException
+
+        a = self.first
+        b = self.first
+
+        for i in range(0, k):
+            b = b.next
+            if b is None:
+                raise BaseException
+
+        while b is not self.last:
+            a = a.next
+            b = b.next
+
+        return a.value
+
+    def printMiddle(self):
+        if self.isEmpty():
+            raise BaseException
+
+        a = self.first
+        b = self.first
+        while b is not self.last and b.next is not self.last:
+            b = b.next.next
+            a = a.next
+
+        if b is self.last:
+            return a.value
+        else:
+            return a.value, a.next.value
+
+    def hasLoop(self):
+        if self.isEmpty():
+            raise BaseException
+
+        slow = self.first
+        fast = self.first
+
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+
+        if slow == fast:
+            return True
+
+        return False
+
+    @staticmethod
+    def createWithLoop():
+        linkedlist = LinkedList()
+        linkedlist.addLast(10)
+        linkedlist.addLast(20)
+        linkedlist.addLast(30)
+
+        node = linkedlist.last
+        linkedlist.addLast(40)
+        linkedlist.addLast(50)
+        linkedlist.last.next = node
+        return linkedlist
+
 
 if __name__ == "__main__":
     linkedlist = LinkedList()
@@ -118,11 +180,16 @@ if __name__ == "__main__":
     linkedlist.addLast(20)
     linkedlist.addLast(30)
     linkedlist.addLast(40)
+    linkedlist.addLast(50)
     linkedlist.addFirst(100)
     print(linkedlist.indexOf(10))
     print(linkedlist.contains(40))
-    linkedlist.removeFirst()
-    linkedlist.removeLast()
-    linkedlist.reverse()
+    # linkedlist.removeFirst()
+    # linkedlist.removeLast()
     print(linkedlist.toArray())
-    print(linkedlist)
+    print(linkedlist.getKthFromTheEnd(0))
+    linkedlist.reverse()
+    print('print middle', linkedlist.printMiddle())
+    print('reversed', linkedlist.toArray())
+    # looplist = linkedlist.createWithLoop()
+    # print('print has loop', looplist.hasLoop())
