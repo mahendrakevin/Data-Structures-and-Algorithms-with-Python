@@ -162,16 +162,16 @@ class LinkedList:
 
     @staticmethod
     def createWithLoop():
-        linkedlist = LinkedList()
-        linkedlist.addLast(10)
-        linkedlist.addLast(20)
-        linkedlist.addLast(30)
+        linklist = LinkedList()
+        linklist.addLast(10)
+        linklist.addLast(20)
+        linklist.addLast(30)
 
-        node = linkedlist.last
-        linkedlist.addLast(40)
-        linkedlist.addLast(50)
-        linkedlist.last.next = node
-        return linkedlist
+        node = linklist.last
+        linklist.addLast(40)
+        linklist.addLast(50)
+        linklist.last.next = node
+        return linklist
 
 
 if __name__ == "__main__":
